@@ -224,7 +224,7 @@ class Loader:
             c_last = rand.makeRandomLastName(constants.CUSTOMERS_PER_DISTRICT)
 
         c_phone = rand.nstring(constants.PHONE, constants.PHONE)
-        c_since = datetime.now()
+        c_since = datetime.now().isoformat()
         c_credit = constants.BAD_CREDIT if badCredit else constants.GOOD_CREDIT
         c_credit_lim = constants.INITIAL_CREDIT_LIM
         c_discount = rand.fixedPoint(constants.DISCOUNT_DECIMALS, constants.MIN_DISCOUNT, constants.MAX_DISCOUNT)
@@ -251,7 +251,7 @@ class Loader:
     ## ==============================================
     def generateOrder(self, o_w_id, o_d_id, o_id, o_c_id, o_ol_cnt, newOrder):
         """Returns the generated o_ol_cnt value."""
-        o_entry_d = datetime.now()
+        o_entry_d = datetime.now().isoformat()
         o_carrier_id = constants.NULL_CARRIER_ID if newOrder else rand.number(constants.MIN_CARRIER_ID, constants.MAX_CARRIER_ID)
         o_all_local = constants.INITIAL_ALL_LOCAL
         return [ o_id, o_c_id, o_d_id, o_w_id, o_entry_d, o_carrier_id, o_ol_cnt, o_all_local ]
@@ -263,7 +263,7 @@ class Loader:
     def generateOrderLine(self, ol_w_id, ol_d_id, ol_o_id, ol_number, max_items, newOrder):
         ol_i_id = rand.number(1, max_items)
         ol_supply_w_id = ol_w_id
-        ol_delivery_d = datetime.now()
+        ol_delivery_d = datetime.now().isoformat()
         ol_quantity = constants.INITIAL_QUANTITY
 
         if newOrder == False:
@@ -303,7 +303,7 @@ class Loader:
     def generateHistory(self, h_c_w_id, h_c_d_id, h_c_id):
         h_w_id = h_c_w_id
         h_d_id = h_c_d_id
-        h_date = datetime.now()
+        h_date = datetime.now().isoformat()
         h_amount = constants.INITIAL_AMOUNT
         h_data = rand.astring(constants.MIN_DATA, constants.MAX_DATA)
         return [ h_c_id, h_c_d_id, h_c_w_id, h_d_id, h_w_id, h_date, h_amount, h_data ]
